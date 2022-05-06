@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Your Serverless Cloud. Beautiful.</title>
+  <title>DigitalOcean Functions.</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <style>
@@ -19,13 +19,13 @@
 
 <body style="padding-top:100px">
   <div class="container" style="width:650px">
-    <center><img width="350px" src="%%PUBLIC_URL%%/assets/logo.png"></center>
-    <h2>Cloud-native by construction.<br />No tools added.</h2>
+
+    <h2>DigitalOcean Functions.<br /></h2>
     <form id="myform" onsubmit="generate(); return false">
       <div class="form-group">
         <input id="mytext" class="form-control" style="float:left;width:85%;" type="text" name="text" maxlength="1024"
-          placeholder="enter text here and click Translate" value="" />
-          <button id="mysubmitjs" type="button" class="btn btn-primary" style="margin-top:5px;">Translate (Node API)</button>
+          placeholder="enter text here and click Resize" value="" />
+        <button id="mysubmitjs" type="button" class="btn btn-primary">Resize</button>
       </div>
       <div style=" margin:auto" id="myresult">
       </div>
@@ -34,16 +34,8 @@
 
   <script type="text/javascript">
     var last = undefined
-    var FUNCTION_API_URL = "%%FUNCTION_API_URL%%";
-    var envAPI = undefined
-
-    $("#mysubmit").click(function () {
-      envAPI = '/default/qr-java'
-      doit()
-    })
 
     $("#mysubmitjs").click(function () {
-      envAPI = '/default/qr'
       doit()
     })
 
@@ -51,13 +43,9 @@
       var txt = $("#mytext").val().trim()
       if (last != txt) {
         last = txt
-        let API = FUNCTION_API_URL + envAPI
-        let src = API + '?text=' + escape(txt)
-        console.log("sending", src)
-        $.get(src, function (data, status) {
-          console.log("status", status)
-          $("#myresult").html('<img width="200" style="display:block; margin:auto;padding-top:10px" src="' + data + '" />')
-        })
+        let API = 'https://faas-nyc1-78edc.doserverless.io/api/v1/web/fn-a30834a8-adfb-4995-8e8f-99974805d552/default/resize-image'
+        let src = API + '?url=' + escape(txt)
+        $("#myresult").html('<img width="200" style="display:block; margin:auto;padding-top:10px" src="' + src + '" />')
       }
     }
   </script>
