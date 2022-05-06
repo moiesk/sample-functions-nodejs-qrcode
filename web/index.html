@@ -43,7 +43,7 @@
       var txt = $("#mytext").val().trim()
       if (last != txt) {
         last = txt
-        let API = 'https://faas-nyc1-78edc.doserverless.io/api/v1/web/fn-a30834a8-adfb-4995-8e8f-99974805d552/default/resize-image'
+        let API = 'https://faas-nyc1-26c15.doserverless.io/api/v1/web/fn-2e3df038-fe44-4d03-9b49-2bcf8eb41e2f/default/resize'
         let src = API + '?url=' + escape(txt)
         $("#myresult").html('<img width="200" style="display:block; margin:auto;padding-top:10px" src="' + src + '" />')
       }
